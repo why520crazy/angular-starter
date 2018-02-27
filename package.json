@@ -1,0 +1,29 @@
+{
+  "name": "angular-starter",
+  "version": "1.0.0",
+  "description": "angular 5.x stater",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --progress --env.prod",
+    "build-dev": "webpack --progress",
+    "serve": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/why520crazy/angular-starter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/why520crazy/angular-starter/issues"
+  },
+  "homepage": "https://github.com/why520crazy/angular-starter#readme",
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.18",
+    "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
+    "webpack": "^4.0.1",
+    "webpack-cli": "^2.0.9",
+    "webpack-dev-server": "^3.0.0"
+  }
+}
