@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'Worktile Mission';
+  title = 'Angular + Webpack App';
 
   constructor() {
     // alert((parent as any).appGlobal);

@@ -1,0 +1,4 @@
+<h2>This is Project List Page</h2>
+<ul>
+  <li *ngFor="let project of projects" > <a routerLink="/projects/{{project.id}}">{{project.name}}</a> </li>
+</ul>

@@ -85,7 +85,8 @@ module.exports = function (options) {
                     "environments/environment.ts": "environments/environment.prod.ts"
                 },
                 "sourceMap": isProd ? false : true,
-                "tsConfigPath": "tsconfig.json",
+                "tsConfigPath": "./src/tsconfig.json",
+                // "tsConfigPath": "tsconfig.json",
                 "compilerOptions": {}
             })
         ],
@@ -97,10 +98,10 @@ module.exports = function (options) {
             contentBase: path.join(__dirname, 'src'), // boolean | string | array, static file location
             open: true,
             compress: true, // enable gzip compression
-            // historyApiFallback: true, // true for index.html upon 404, object for multiple paths
+            historyApiFallback: true, // true for index.html upon 404, object for multiple paths
             // hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
             // https: false, // true for self-signed, object for cert authority
-            // noInfo: true, // only errors & warns on hot reload
+            noInfo: true, // only errors & warns on hot reload
         }
     };
 
