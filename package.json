@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --progress --env.prod",
     "build-dev": "webpack --progress",
-    "serve": "webpack-dev-server",
+    "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,9 +19,34 @@
     "url": "https://github.com/why520crazy/angular-starter/issues"
   },
   "homepage": "https://github.com/why520crazy/angular-starter#readme",
+  "dependencies": {
+    "@angular/animations": "^5.2.0",
+    "@angular/common": "^5.2.0",
+    "@angular/compiler": "^5.2.0",
+    "@angular/core": "^5.2.0",
+    "@angular/forms": "^5.2.0",
+    "@angular/http": "^5.2.0",
+    "@angular/platform-browser": "^5.2.0",
+    "@angular/platform-browser-dynamic": "^5.2.0",
+    "@angular/router": "^5.2.0",
+    "core-js": "^2.4.1",
+    "rxjs": "^5.5.6",
+    "zone.js": "^0.8.19"
+  },
   "devDependencies": {
+    "@angular/cli": "~1.7.1",
+    "@angular/compiler-cli": "^5.2.0",
+    "@angular/language-service": "^5.2.0",
+    "@types/node": "~6.0.60",
+    "autoprefixer": "^8.0.0",
+    "awesome-typescript-loader": "^3.5.0",
     "clean-webpack-plugin": "^0.1.18",
+    "codelyzer": "^4.0.1",
     "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
+    "raw-loader": "^0.5.1",
+    "ts-node": "~4.1.0",
+    "tslint": "~5.9.1",
+    "typescript": "^2.7.2",
     "webpack": "^4.0.1",
     "webpack-cli": "^2.0.9",
     "webpack-dev-server": "^3.0.0"

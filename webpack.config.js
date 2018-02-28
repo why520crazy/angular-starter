@@ -10,11 +10,13 @@ module.exports = function (options) {
     const config = {
         context: path.resolve(__dirname, "src"),
         entry: {
-            app: "./main.js"
+            polyfills: "./polyfills.ts",
+            app: "./main.ts"
         },
         output: {
             path: path.resolve(__dirname, "dist"),
-            filename: isProd ? "main.bundle.js" : "main.bundle.js",
+            filename: isProd ? "[name].bundle.js" : "[name].bundle.js",
+            chunkFilename: isProd ? '[name].[hash].js' : '[name].bundle.js'
             // publicPath: "/assets/"
         },
         mode: isProd ? "production" : "development",
@@ -23,6 +25,11 @@ module.exports = function (options) {
             rules: [
                 {
                     test: /\.html$/,
+                    loader: "raw-loader"
+                },
+                {
+                    test: /\.ts?$/,
+                    loader: 'awesome-typescript-loader'
                 }
             ]
         },
@@ -31,11 +38,11 @@ module.exports = function (options) {
             // (does not apply to resolving to loaders)
             modules: [
                 "node_modules",
-                path.resolve(__dirname, "src/app")
+                path.resolve(__dirname, "src")
             ],
-            extensions: [".ts", ".js", ".json", ".jsx", ".css"],
+            extensions: [".ts", ".js", "tsx", ".json", ".jsx", ".css", ".html"],
             alias: {
-
+                '@angular/upgrade/static': '@angular/upgrade/bundles/upgrade-static.umd.js'
             }
         },
         devtool: isProd ? "inline-source-map" : "source-map", // enum

@@ -1,2 +1,2 @@
 # angular-starter
-angular 5.x stater
+Angular 5.x + Webpack 4.x starter.
