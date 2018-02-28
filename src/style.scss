@@ -1,0 +1,15 @@
+@import "./assets/styles/index.scss";
+@import "~bootstrap/scss/bootstrap.scss";
+
+:root {
+    --color: red;
+}
+
+a {
+    color: var(--color);
+}
+
+
+.main-wrapper {
+    width: 100px;
+}

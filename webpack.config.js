@@ -27,7 +27,14 @@ module.exports = function (options) {
             rules: [
                 {
                     test: /\.html$/,
-                    loader: "raw-loader"
+                    loader: "html-loader"
+                },
+                {
+                    "test": /\.(jpg|png|webp|gif|otf|ttf|woff|woff2|ani)$/,
+                    "loader": "file-loader",
+                    "options": {
+                        "name": "[path][name].[ext]?[hash:20]"
+                    }
                 },
                 {
                     test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
@@ -51,6 +58,30 @@ module.exports = function (options) {
                             "options": {
                                 "sourceMap": false
                             }
+                        }
+                    ]
+                },
+                {
+                    test: /\.css|scss|sass$/,
+                    // exclude: /node_modules/,
+                    // include: [
+                    //     path.join(nodeModules, 'bootstrap'),
+                    // ],
+                    use: [
+                        {
+                            loader: 'style-loader',
+                        },
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                importLoaders: 1,
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader'
+                        },
+                        {
+                            loader: 'sass-loader'
                         }
                     ]
                 }
