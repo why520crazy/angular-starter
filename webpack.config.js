@@ -2,6 +2,8 @@ const path = require("path");
 const HTMLPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const webpack = require("webpack");
+const {AngularCompilerPlugin} = require("@ngtools/webpack");
+const {NoEmitOnErrorsPlugin, EnvironmentPlugin, HashedModuleIdsPlugin} = require('webpack');
 
 module.exports = function (options) {
     options = options || {};
@@ -11,7 +13,7 @@ module.exports = function (options) {
         context: path.resolve(__dirname, "src"),
         entry: {
             polyfills: "./polyfills.ts",
-            app: "./main.ts"
+            main: "./main.ts"
         },
         output: {
             path: path.resolve(__dirname, "dist"),
@@ -28,8 +30,29 @@ module.exports = function (options) {
                     loader: "raw-loader"
                 },
                 {
-                    test: /\.ts?$/,
-                    loader: 'awesome-typescript-loader'
+                    test: /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
+                    // loader: '@ngtools/webpack',
+                    "use": [
+                        {
+                            "loader": "@angular-devkit/build-optimizer/webpack-loader",
+                            "options": {
+                                "sourceMap": isProd ? false : true
+                            }
+                        },
+                        "@ngtools/webpack"
+                    ]
+
+                },
+                {
+                    "test": /\.js$/,
+                    "use": [
+                        {
+                            "loader": "@angular-devkit/build-optimizer/webpack-loader",
+                            "options": {
+                                "sourceMap": false
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -45,12 +68,25 @@ module.exports = function (options) {
                 '@angular/upgrade/static': '@angular/upgrade/bundles/upgrade-static.umd.js'
             }
         },
-        devtool: isProd ? "inline-source-map" : "source-map", // enum
+        // devtool: isProd ? "inline-source-map" : "source-map", // enum
         plugins: [
             new CleanWebpackPlugin(['dist'], {}),
             new HTMLPlugin({
                 template: "./index.html",
                 filename: "index.html"
+            }),
+            new EnvironmentPlugin({
+                "NODE_ENV": "production"
+            }),
+            new AngularCompilerPlugin({
+                "mainPath": "main.ts",
+                "platform": 0,
+                "hostReplacementPaths": {
+                    "environments/environment.ts": "environments/environment.prod.ts"
+                },
+                "sourceMap": isProd ? false : true,
+                "tsConfigPath": "tsconfig.json",
+                "compilerOptions": {}
             })
         ],
         devServer: {
