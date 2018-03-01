@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --progress --env.prod",
     "build-dev": "webpack --progress",
-    "start": "webpack-dev-server",
+    "start": "webpack-dev-server --port 9000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

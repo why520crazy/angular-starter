@@ -125,7 +125,6 @@ module.exports = function (options) {
             // proxy: { // proxy URLs to backend development server
             //     '/api': 'http://localhost:3000'
             // },
-            port: 9000,
             contentBase: path.join(__dirname, 'src'), // boolean | string | array, static file location
             open: true,
             compress: true, // enable gzip compression
