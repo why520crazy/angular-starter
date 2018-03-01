@@ -1,13 +1,19 @@
 @import "./assets/styles/index.scss";
 @import "~bootstrap/scss/bootstrap.scss";
 
-:root {
-    --color: red;
+body {
+    padding-top: 48px;
 }
+.main{
+    padding-top: 20px;
+}
+// :root {
+//     --color: red;
+// }
 
-a {
-    color: var(--color);
-}
+// a {
+//     color: var(--color);
+// }
 
 
 .main-wrapper {

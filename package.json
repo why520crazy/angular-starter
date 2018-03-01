@@ -47,6 +47,7 @@
     "clean-webpack-plugin": "^0.1.18",
     "codelyzer": "^4.0.1",
     "css-loader": "^0.28.10",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.10",
     "html-webpack-plugin": "webpack-contrib/html-webpack-plugin",
     "postcss-loader": "^2.1.1",

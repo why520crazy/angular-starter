@@ -2,8 +2,9 @@ const path = require("path");
 const HTMLPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const webpack = require("webpack");
-const {AngularCompilerPlugin} = require("@ngtools/webpack");
-const {NoEmitOnErrorsPlugin, EnvironmentPlugin, HashedModuleIdsPlugin} = require('webpack');
+const { AngularCompilerPlugin } = require("@ngtools/webpack");
+const { NoEmitOnErrorsPlugin, EnvironmentPlugin, HashedModuleIdsPlugin } = require('webpack');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = function (options) {
     options = options || {};
@@ -13,7 +14,8 @@ module.exports = function (options) {
         context: path.resolve(__dirname, "src"),
         entry: {
             polyfills: "./polyfills.ts",
-            main: "./main.ts"
+            main: "./main.ts",
+            style: "./style.scss"
         },
         output: {
             path: path.resolve(__dirname, "dist"),
@@ -63,6 +65,9 @@ module.exports = function (options) {
                 },
                 {
                     test: /\.css|scss|sass$/,
+                    exclude: [
+                        path.join(process.cwd(), "src/styles.scss")
+                    ],
                     // exclude: /node_modules/,
                     // include: [
                     //     path.join(nodeModules, 'bootstrap'),
@@ -84,7 +89,30 @@ module.exports = function (options) {
                             loader: 'sass-loader'
                         }
                     ]
-                }
+                },
+                {
+                    include: [
+                        path.join(process.cwd(), "src/styles.scss")
+                    ],
+                    "test": /\.scss$|\.sass$/,
+                    "use": [
+                        "style-loader",
+                        {
+                            "loader": "raw-loader"
+                        },
+                        {
+                            "loader": "postcss-loader"
+                        },
+                        {
+                            "loader": "sass-loader",
+                            "options": {
+                                "sourceMap": true,
+                                "precision": 8,
+                                "includePaths": []
+                            }
+                        }
+                    ]
+                },
             ]
         },
         resolve: {
@@ -119,7 +147,8 @@ module.exports = function (options) {
                 "tsConfigPath": "./src/tsconfig.json",
                 // "tsConfigPath": "tsconfig.json",
                 "compilerOptions": {}
-            })
+            }),
+
         ],
         devServer: {
             // proxy: { // proxy URLs to backend development server
@@ -134,10 +163,24 @@ module.exports = function (options) {
             noInfo: true, // only errors & warns on hot reload
         },
         optimization: {
+            runtimeChunk: "single",
             splitChunks: {
-                chunks: "initial",
-                name: "vendor"
-            }
+                chunks: "all",
+                cacheGroups: {
+                    vendors: false,
+                    vendor: {
+                        name: "vendor",
+                        chunks: "initial"
+                    }
+                }
+            },
+            // splitChunks: {
+            //     chunks: "initial",
+            //     name: "vendor"
+            // }
+        },
+        loader: {
+            "stylus": {}
         }
     };
 
