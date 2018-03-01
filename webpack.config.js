@@ -17,8 +17,8 @@ module.exports = function (options) {
         },
         output: {
             path: path.resolve(__dirname, "dist"),
-            filename: isProd ? "[name].bundle.js" : "[name].bundle.js",
-            chunkFilename: isProd ? '[name].[hash].js' : '[name].bundle.js'
+            filename: isProd ? "[name].bundle.[chunkhash].js" : "[name].bundle.js",
+            chunkFilename: isProd ? '[name].bundle.[chunkhash].js' : '[name].bundle.js'
             // publicPath: "/assets/"
         },
         mode: isProd ? "production" : "development",
@@ -133,13 +133,14 @@ module.exports = function (options) {
             // hot: true, // hot module replacement. Depends on HotModuleReplacementPlugin
             // https: false, // true for self-signed, object for cert authority
             noInfo: true, // only errors & warns on hot reload
+        },
+        optimization: {
+            splitChunks: {
+                chunks: "initial",
+                name: "vendor"
+            }
         }
     };
 
-    if (isProd) {
-        config.optimization = {
-            minimize: true
-        }
-    }
     return config;
 }
